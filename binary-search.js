@@ -8,10 +8,26 @@ let defaultCompare = (a, b) =>
     Loops
 */
 let binarySearchWithLoops = (array, element, compare = defaultCompare) => {
-  for(let i = 0; i < array.length; i++) {
-    if(array[i]===element) return i
+
+  let left = 0
+  let right = array.length
+  let breakOut = 0
+  let half = Math.floor(left + (right-left)/2)
+  while(array[half]!=element) {
+    breakOut++
+    half = Math.floor(left + (right-left)/2)
+    if(array[half] > element) right = half
+    if(array[half] < element) left = half
+    console.log('right: ', right)
+    console.log('left: ', left)
+    if(right-left<=1 ) {
+      console.log("returning")
+      return -1
+    }
+    if(breakOut>10) break
   }
-    return -1;
+  console.log('half: ', half)
+  return half;
 };
 
 export default binarySearchWithLoops;
